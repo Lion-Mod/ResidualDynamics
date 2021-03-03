@@ -1,6 +1,9 @@
 # ResidualDynamics
 Fastai callback to visualise how residuals change after each epoch.
 
+## Requirements
+Latest `fastai` version.
+
 ## How it works
 Before fitting - store all ground truths
 
