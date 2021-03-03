@@ -16,7 +16,7 @@ class ResidualDynamics(Callback):
     def before_epoch(self):
         """Called at the beginning of each epoch, useful for any behavior you need to reset at each epoch."""
 
-        # Prepare empty pred container in every epoch, set/reset here as new preds each epoch as NN learns
+        # Prepare prediction container in every epoch, set/reset here as new predictions are obtained after each epoch as NN learns
         self.y_pred = []
 
     def after_pred(self):
@@ -25,11 +25,11 @@ class ResidualDynamics(Callback):
         if self.training:
             return
 
-        # Get y_true in epoch 0
+        # Get ground truths in epoch 0 i.e. start of training
         if self.epoch == 0:
             self.y_true.extend(self.y.cpu().flatten().numpy())
 
-        # Gather last prediction for every batch
+        # Get predictions from each batch and add them to prediction container
         y_pred = self.pred.detach().cpu()
         
         self.y_pred.extend(y_pred.flatten().numpy())
